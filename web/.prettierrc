@@ -1,0 +1,9 @@
+{
+  "singleQuote": false,
+  "endOfLine": "auto",
+  "trailingComma": "none",
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "importOrder": ["^app/*(.*)$", "^assets/*(.*)$", "^utils/*(.*)$", "^[./]"],
+  "plugins": ["@trivago/prettier-plugin-sort-imports"]
+}
