@@ -23,7 +23,16 @@
 ### ⚡️ Running the development server
 
 ```bash
+copier coller le .env et le rename .env.local et modifier les valeurs suivantes:
+- APP_ENV = prod -> APP_ENV = dev
+- DATABASE_URL="postgresql://app:!ChangeMe!@127.0.0.1:5432/app?serverVersion=16&charset=utf8" -> DATABASE_URL="postgresql://username:password@127.0.0.1:5432/dbname"
+- CORS_ALLOW_ORIGIN='^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$' -> CORS_ALLOW_ORIGIN='*'
 
+lancer les commandes suivantes:
+- composer install (install les bundles)
+- php bin/console do:mi:mi (construction des tables)
+- php bin/console do:fi:lo (insertion des datas par defaut/test)
+- symfony server:start (start le server)
 ```
 
 ### ✅ Running the tests
@@ -32,16 +41,10 @@
 
 ```
 
-### 👷 Building for production
-
-```bash
-
-```
-
 ### 🚀 Running the production server
 
 ```bash
-
+- APP_ENV = prod dans le .env.local ou delete le .env.local
 ```
 
 ---
