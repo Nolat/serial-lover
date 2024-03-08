@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\PlayerRepository;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: PlayerRepository::class)]
 class Player
@@ -11,15 +12,19 @@ class Player
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['player_get'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['player_get'])]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['player_get'])]
     private ?string $lastname = null;
 
     #[ORM\Column(options: ['default' => false])]
+    #[Groups(['player_get'])]
     private ?bool $isPlaying = false;
 
     public function getId(): ?int
