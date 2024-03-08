@@ -21,6 +21,18 @@ class PlayerRepository extends ServiceEntityRepository
         parent::__construct($registry, Player::class);
     }
 
+    public function search($datas) {
+        $qb = $this->createQueryBuilder('p')
+            ->orderBy('p.lastname', 'ASC');
+
+        if (isset($datas['search']) && $datas['search']) {
+            $qb ->andWhere('p.firstname LIKE :search OR p.lastname LIKE :search')
+                ->setParameter('search', '%'.$datas['search'].'%');
+        }
+
+        return  $qb->getQuery()->getResult();
+    }
+
     //    /**
     //     * @return Player[] Returns an array of Player objects
     //     */
