@@ -17,8 +17,14 @@ class PlayerFixtures extends Fixture
         $player = new Player();
         $player->setFirstname('test')
             ->setLastname('player');
-
         $manager->persist($player);
+
+
+        $player2 = new Player();
+        $player2->setFirstname('test2')
+            ->setLastname('player2');
+        $manager->persist($player2);
+
         $manager->flush();
     }
 }

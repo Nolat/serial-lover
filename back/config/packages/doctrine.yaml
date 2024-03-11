@@ -17,6 +17,9 @@ doctrine:
         auto_mapping: true
         filters:
           deleted_filter: App\Doctrine\DeletedFilter
+        dql:
+          numeric_functions:
+            rand: DoctrineExtensions\Query\Mysql\Rand
         mappings:
             App:
                 type: attribute
