@@ -25,7 +25,7 @@ class QuestRepository extends ServiceEntityRepository
     public function findRandomQuest(Player $player) {
         $qb = $this->createQueryBuilder('q')
             ->andWhere('q.id NOT IN (:quests)')
-            ->setParameter('quests', implode(',',$player->getQuestFromPlayerQuests()))
+            ->setParameter('quests',$player->getQuestFromPlayerQuests())
             ->getQuery()->getResult();
         if ($qb) {
             return $qb[random_int(0, count($qb) -1)];

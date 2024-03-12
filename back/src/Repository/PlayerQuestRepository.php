@@ -28,6 +28,16 @@ class PlayerQuestRepository extends ServiceEntityRepository
             ->setParameter('valid', false)
             ->andWhere('p.player = :player')
             ->andWhere('p.valid = :valid')
+            ->getQuery()->getOneOrNullResult();
+    }
+
+    public function findNbValidatedQuests(Player $player) {
+        return $this->createQueryBuilder('p')
+            ->select('COALESCE(COUNT(p.id), 0) as score')
+            ->setParameter('player', $player)
+            ->setParameter('valid', true)
+            ->andWhere('p.player = :player')
+            ->andWhere('p.valid = :valid')
             ->getQuery()->getSingleResult();
     }
 

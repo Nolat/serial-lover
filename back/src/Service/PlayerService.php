@@ -18,4 +18,9 @@ class PlayerService implements PlayerServiceInterface
         $players = $this->entityManager->getRepository(Player::class)->search($datas);
         return $players;
     }
+
+    public function findRandomTarget(Player $player): Player|null
+    {
+       return $this->entityManager->getRepository(Player::class)->findRandomTarget($player);
+    }
 }
