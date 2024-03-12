@@ -11,4 +11,10 @@ interface PlayerServiceInterface
      * @return array
      */
     public function search(array $datas): array;
+
+    /**
+     * @param Player $player
+     * @return Player|null
+     */
+    public function findRandomTarget(Player $player): Player|null;
 }

@@ -36,7 +36,9 @@ class PlayerRepository extends ServiceEntityRepository
     public function findRandomTarget(Player $player) {
         $qb = $this->createQueryBuilder('p')
             ->andWhere('p.id NOT IN (:targets)')
-            ->setParameter('targets', implode(',',$player->getTargetFromPlayerQuests()))
+            ->andWhere('p.id != :player')
+            ->setParameter('targets', $player->getTargetFromPlayerQuests())
+            ->setParameter('player', $player->getId())
             ->getQuery()->getResult();
         if ($qb) {
             return $qb[random_int(0, count($qb) -1)];
