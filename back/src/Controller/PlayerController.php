@@ -6,6 +6,7 @@ use App\Controller\AbstractController\AbstractApiController;
 use App\Entity\Player;
 use App\Entity\PlayerQuest;
 use App\Service\PlayerService;
+use Nelmio\ApiDocBundle\Annotation\Model;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 
