@@ -34,6 +34,7 @@ class PlayerRepository extends ServiceEntityRepository
     }
 
     public function findRandomTarget(Player $player) {
+        //TODO ne pas associer si deja eu la target ou si deja été la target
         $qb = $this->createQueryBuilder('p')
             ->andWhere('p.id NOT IN (:targets)')
             ->andWhere('p.id != :player')
