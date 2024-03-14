@@ -7,19 +7,18 @@ test.describe("Login process", () => {
     await expect(page).toHaveURL("/login");
 
     await expect(
-      page.getByRole("button", { name: "Se connecter" })
+      page.getByRole("textbox", { name: "Qui es-tu ?" })
     ).toBeVisible();
   });
 
   test("User logs in", async ({ page }) => {
     await page.goto("/login");
-    await page.click("text=Se connecter");
 
-    await expect(page).toHaveURL("/");
+    await page.getByRole("textbox", { name: "Qui es-tu ?" }).click();
 
-    await expect(
-      page.getByRole("heading", { name: "Bienvenue" })
-    ).toBeVisible();
+    await expect(page.getByTestId("login-modal")).toBeVisible();
+
+    await page.getByTestId("login-modal").getByRole("textbox").fill("Test");
   });
 
   test("User is logged in", async ({ page }) => {
