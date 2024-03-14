@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20240313194602 extends AbstractMigration
+final class Version20240314082235 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,6 +20,9 @@ final class Version20240313194602 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
+        $this->addSql('CREATE SEQUENCE player_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE player_quest_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE quest_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE TABLE player (id INT NOT NULL, firstname VARCHAR(255) NOT NULL, lastname VARCHAR(255) NOT NULL, is_playing BOOLEAN DEFAULT false NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE player_quest (id INT NOT NULL, target_id INT NOT NULL, quest_id INT NOT NULL, player_id INT NOT NULL, valid BOOLEAN DEFAULT false NOT NULL, validated_date TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_FC658351158E0B66 ON player_quest (target_id)');
@@ -44,6 +47,9 @@ final class Version20240313194602 extends AbstractMigration
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE SCHEMA public');
+        $this->addSql('DROP SEQUENCE player_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE player_quest_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE quest_id_seq CASCADE');
         $this->addSql('ALTER TABLE player_quest DROP CONSTRAINT FK_FC658351158E0B66');
         $this->addSql('ALTER TABLE player_quest DROP CONSTRAINT FK_FC658351209E9EF4');
         $this->addSql('ALTER TABLE player_quest DROP CONSTRAINT FK_FC65835199E6F5DF');
