@@ -26,8 +26,8 @@ class PlayerRepository extends ServiceEntityRepository
             ->orderBy('p.lastname', 'ASC');
 
         if (isset($datas['search']) && $datas['search']) {
-            $qb ->andWhere('p.firstname LIKE :search OR p.lastname LIKE :search')
-                ->setParameter('search', '%'.$datas['search'].'%');
+            $qb ->andWhere('LOWER(p.firstname) LIKE :search OR LOWER(p.lastname) LIKE :search')
+                ->setParameter('search', '%'.strtolower($datas['search']).'%');
         }
 
         return  $qb->getQuery()->getResult();
