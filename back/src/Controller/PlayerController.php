@@ -7,6 +7,7 @@ use App\Entity\Player;
 use App\Entity\PlayerQuest;
 use App\Service\PlayerService;
 use Nelmio\ApiDocBundle\Annotation\Model;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -18,10 +19,25 @@ class PlayerController extends AbstractApiController
         $datas = [
             'search' => $request->get('search')
         ];
+        if ($datas['search']) {
+            $players = $playerService->search($datas);
+            return $this->renderSerializeJson($players, ['player_get']);
+        }
+        return $this->renderSerializeJson([]);
+    }
 
-        $players = $playerService->search($datas);
-
-        return $this->renderSerializeJson($players, ['player_get']);
+    #[Route('/{id}', name: 'update_player', methods: 'PUT')]
+    public function updatePlayer(PlayerService $playerService, Request $request, $id) {
+        $datas = json_decode($request->getContent(), true);
+        if (isset($datas['is_playing']) && gettype($datas['is_playing']) === 'boolean') {
+            $player = $this->entityManager->getRepository(Player::class)->find($id);
+            if ($player){
+                $player->setIsPlaying($datas['is_playing']);
+                return $this->renderSerializeJson($player, ['player_get']);
+            }
+            return new JsonResponse('Joueur inconnu',500, [], true);
+        }
+        return new JsonResponse('Une erreur c\'est produite',500, [], true);
     }
 
     #[Route('/{id}/quest', name: 'get_current_player_quest', methods: 'GET')]
