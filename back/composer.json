@@ -61,6 +61,10 @@
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
+      "test": [
+        "Composer\\Config::disableProcessTimeout",
+        "php bin/console doctrine:database:drop --force --if-exists --env=test && php bin/console doctrine:database:create --env=test && php bin/console doctrine:migration:migrate --no-interaction --env=test && php bin/console cache:clear --env=test && php -d memory_limit=512M bin/console doctrine:fixtures:load --env=test --no-interaction && php -d memory_limit=512M ./vendor/bin/phpunit -c phpunit.xml.dist"
+      ],
         "post-install-cmd": [
             "@auto-scripts"
         ],
@@ -78,6 +82,7 @@
         }
     },
     "require-dev": {
+        "dama/doctrine-test-bundle": "^8.0",
         "doctrine/doctrine-fixtures-bundle": "^3.5",
         "phpunit/phpunit": "^9.5",
         "symfony/browser-kit": "6.4.*",

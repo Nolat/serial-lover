@@ -59,4 +59,6 @@ class PlayerController extends AbstractApiController
         }
         return $this->renderSerializeJson('Vous avez terminé toutes les quêtes disponible, n\'hesitez pas à faire réclamation aux près d\'Alexis qui n\'a pas assez rempli la BDD OMG WTF WHAT ARE YOU DOING');
     }
+
+
 }

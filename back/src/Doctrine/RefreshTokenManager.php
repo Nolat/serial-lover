@@ -6,9 +6,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectManager;
 use Gesdinet\JWTRefreshTokenBundle\Entity\RefreshTokenRepository;
 use Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenInterface;
-use Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenManager as BaseRefreshTokenManager;
+use Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenManagerInterface;
 
-class RefreshTokenManager extends BaseRefreshTokenManager
+class RefreshTokenManager implements RefreshTokenManagerInterface
 {
     /**
      * @var EntityManagerInterface
@@ -60,8 +60,9 @@ class RefreshTokenManager extends BaseRefreshTokenManager
 
     /**
      * @param bool|true $andFlush
+     * @return void
      */
-    public function save(RefreshTokenInterface $refreshToken, $andFlush = true)
+    public function save(RefreshTokenInterface $refreshToken, $andFlush = true): void
     {
         $this->objectManager->persist($refreshToken);
 
@@ -72,8 +73,9 @@ class RefreshTokenManager extends BaseRefreshTokenManager
 
     /**
      * @param bool $andFlush
+     * @return void
      */
-    public function delete(RefreshTokenInterface $refreshToken, $andFlush = true)
+    public function delete(RefreshTokenInterface $refreshToken, $andFlush = true): void
     {
         $this->objectManager->remove($refreshToken);
 
@@ -111,5 +113,13 @@ class RefreshTokenManager extends BaseRefreshTokenManager
     public function getClass()
     {
         return $this->class;
+    }
+
+    /**
+     * @return RefreshTokenInterface
+     */
+    public function create(): RefreshTokenInterface
+    {
+        return $this->create();
     }
 }
