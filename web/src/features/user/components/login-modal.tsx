@@ -36,16 +36,15 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
 
   const logIn = (player: Player) => {
+    console.log({ player });
     setUser(player);
     navigate("/");
   };
 
-  const fetchPlayers = (search: string): Promise<Player[]> =>
-    axios.get("api/players", { params: { search } }).then((res) => res.data);
-
-  const { mutate, isPending } = useMutation({
+  const { mutate: fetch, isPending: isFetching } = useMutation({
     mutationKey: ["players"],
-    mutationFn: fetchPlayers,
+    mutationFn: (search: string): Promise<Player[]> =>
+      axios.get("api/players", { params: { search } }).then((res) => res.data),
     onSuccess: (data) => {
       if (data.length > 4) {
         data = data.slice(0, 4);
@@ -58,7 +57,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
     e.preventDefault();
     const value = e.target.value;
 
-    mutate(value);
+    fetch(value);
   };
 
   return (
@@ -80,7 +79,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
               <Spinner
                 size="sm"
                 color="gray.400"
-                visibility={isPending ? "visible" : "hidden"}
+                visibility={isFetching ? "visible" : "hidden"}
               />
             </InputRightElement>
           </InputGroup>

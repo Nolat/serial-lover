@@ -1,4 +1,5 @@
 import { Box, Button, Flex, HStack, useTheme } from "@chakra-ui/react";
+import { useMutation } from "@tanstack/react-query";
 import { Check, X } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -7,10 +8,12 @@ import { TypeAnimation } from "react-type-animation";
 import { useRulesStore } from "features/rules/stores/rules-store";
 import { useUserStore } from "features/user/stores/user-store";
 
+import { axios } from "lib/axios";
+
 const Rules = () => {
   const theme = useTheme();
 
-  const { user, resetUser } = useUserStore();
+  const { user, setUser, resetUser } = useUserStore();
 
   const { acceptRules, resetRules } = useRulesStore();
 
@@ -21,6 +24,10 @@ const Rules = () => {
   const yes = () => {
     acceptRules();
     navigate("/");
+
+    const updatedUser: Player = { ...user!, is_playing: true };
+    update(updatedUser);
+    setUser(updatedUser);
   };
 
   const no = () => {
@@ -28,6 +35,12 @@ const Rules = () => {
     navigate("/login");
     resetRules();
   };
+
+  const { mutate: update } = useMutation({
+    mutationKey: ["updatePlayer"],
+    mutationFn: (player: Player): Promise<Player> =>
+      axios.put(`api/players/${player.id}`, player).then((res) => res.data)
+  });
 
   return (
     <Flex
