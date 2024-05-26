@@ -1,35 +1,31 @@
-import { Box, Button, Heading } from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 import { userUserStore } from "features/user/stores/user-store";
 
-const Home = () => {
-  const { resetUser } = userUserStore();
+const Login = () => {
+  const { setUser } = userUserStore();
 
   const navigate = useNavigate();
 
-  const logout = () => {
-    resetUser();
-    navigate("/login");
+  const login = () => {
+    setUser("user");
+    navigate("/");
   };
 
   return (
     <Box bg="white">
-      <Heading as="h1" color="black">
-        Bienvenue
-      </Heading>
-
       <Button
         mt="20"
         bg="primary.600"
         _hover={{ bg: "primary.900" }}
         color="white"
-        onClick={logout}
+        onClick={login}
       >
-        Se déconnecter
+        Se connecter
       </Button>
     </Box>
   );
 };
 
-export default Home;
+export default Login;

@@ -1,13 +1,15 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import { useRoutes } from "react-router-dom";
-import routes from "~react-pages";
+import { useRouter } from "hooks";
+import { RouterProvider } from "react-router-dom";
 
 import { theme } from "utils/theme";
 
 export const App = () => {
+  const router = useRouter();
+
   return (
     <ChakraProvider theme={theme} resetCSS>
-      {useRoutes(routes)}
+      <RouterProvider router={router} />
     </ChakraProvider>
   );
 };
