@@ -1,13 +1,13 @@
-api_login_check:
-  path: /api/login
-
 gesdinet_jwt_refresh_token:
   path: /api/refresh_token
-  controller: gesdinet.jwtrefreshtoken::refresh
 
 controllers:
     resource: ../src/Controller/
     type: attribute
+
+
+api_login_check:
+  path: /api/login
 
 app.swagger_ui:
   path: /api/doc
