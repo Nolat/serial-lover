@@ -33,6 +33,7 @@ class PlayerController extends AbstractApiController
             $player = $this->entityManager->getRepository(Player::class)->find($id);
             if ($player){
                 $player->setIsPlaying($datas['is_playing']);
+                $this->entityManager->flush();
                 return $this->renderSerializeJson($player, ['player_get']);
             }
             return new JsonResponse('Joueur inconnu',500, [], true);

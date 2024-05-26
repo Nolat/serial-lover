@@ -4,6 +4,18 @@
   "trailingComma": "none",
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,
-  "importOrder": ["^app/*(.*)$", "^assets/*(.*)$", "^utils/*(.*)$", "^[./]"],
+  "importOrder": [
+    "^app/*(.*)$",
+    "^assets/*(.*)$",
+    "^components/*(.*)$",
+    "^features/*(.*)$",
+    "^hooks/*(.*)$",
+    "^lib/*(.*)$",
+    "^pages/*(.*)$",
+    "^test/*(.*)$",
+    "^types/*(.*)$",
+    "^utils/*(.*)$",
+    "^[./]"
+  ],
   "plugins": ["@trivago/prettier-plugin-sort-imports"]
 }

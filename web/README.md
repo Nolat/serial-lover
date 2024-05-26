@@ -9,7 +9,7 @@
     <img alt="License: GPL-3.0" src="https://img.shields.io/github/license/Nolat/serial-lover?style=for-the-badge" target="_blank" />
   </a>
   <a href="https://yarnpkg.com/" target="_blank">
-    <img alt="yarn: v2.4.1" src="https://img.shields.io/static/v1?label=yarn&message=v2.4.1&color=blue&style=for-the-badge&logo=yarn" target="_blank" />
+    <img alt="yarn: v2.4.1" src="https://img.shields.io/static/v1?label=bun&message=v1.1.10&color=blue&style=for-the-badge&logo=bun" target="_blank" />
   </a>
 </p>
 
@@ -23,7 +23,7 @@ This folder contains the Next.js frontend of the application.
 
 ## Contributing
 
-**We're using [Yarn](https://yarnpkg.com/) for this project, do not use npm for the following commands**
+**We're using [Bun](https://bun.sh/) for this project, do not use npm for the following commands**
 
 ---
 
@@ -32,26 +32,20 @@ This folder contains the Next.js frontend of the application.
 ### ⚡️ Running the development server
 
 ```bash
-    yarn dev
+    bun dev
 ```
 
 ### ✅ Running the tests
 
 ```bash
-    yarn test
-    yarn crypress:run
+    bun jest
+    bun playwright
 ```
 
 ### 👷 Building for production
 
 ```bash
-    yarn build
-```
-
-### 🚀 Running the production server
-
-```bash
-    yarn start
+    bun build
 ```
 
 ---
