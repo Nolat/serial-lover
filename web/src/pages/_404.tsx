@@ -1,7 +1,7 @@
 import { Button, Center, Divider, Flex, Text } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
-const Page404 = () => {
+const PageNotFound = () => {
   const navigate = useNavigate();
 
   return (
@@ -21,17 +21,11 @@ const Page404 = () => {
           </Text>
         </Center>
       </Flex>
-      <Button
-        mt="20"
-        bg="primary.600"
-        _hover={{ bg: "primary.900" }}
-        color="white"
-        onClick={() => navigate("/", { replace: true })}
-      >
+      <Button mt="20" onClick={() => navigate("/", { replace: true })}>
         Revenir à l'accueil
       </Button>
     </Flex>
   );
 };
 
-export default Page404;
+export default PageNotFound;

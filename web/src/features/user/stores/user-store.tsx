@@ -3,21 +3,21 @@ import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
 interface UserState {
-  user: string | undefined;
-  setUser: (user: string) => void;
+  user: Player | undefined;
+  setUser: (user: Player) => void;
   resetUser: () => void;
 }
 
-export const userUserStore = create<UserState>()(
+export const useUserStore = create<UserState>()(
   devtools(
     persist(
       (set) => ({
         user: undefined,
-        setUser: (user) => set({ user }),
+        setUser: (user: Player) => set({ user }),
         resetUser: () => set({ user: undefined })
       }),
       {
-        name: "auth-storage"
+        name: "user-storage"
       }
     ),
     { name: "user" }

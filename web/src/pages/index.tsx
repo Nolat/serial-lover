@@ -1,34 +1,23 @@
-import { Box, Button, Heading } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import { Flex } from "@chakra-ui/react";
+import { Navigate } from "react-router-dom";
 
-import { userUserStore } from "features/user/stores/user-store";
+import Header from "features/layout/components/header";
+import TargetInfo from "features/mission/components/target-info";
+import { useRulesStore } from "features/rules/stores/rules-store";
 
 const Home = () => {
-  const { resetUser } = userUserStore();
+  const { hasAcceptedRules } = useRulesStore();
 
-  const navigate = useNavigate();
-
-  const logout = () => {
-    resetUser();
-    navigate("/login");
-  };
+  if (!hasAcceptedRules) {
+    return <Navigate to="/rules" />;
+  }
 
   return (
-    <Box bg="white">
-      <Heading as="h1" color="black">
-        Bienvenue
-      </Heading>
+    <Flex flexDir="column">
+      <Header />
 
-      <Button
-        mt="20"
-        bg="primary.600"
-        _hover={{ bg: "primary.900" }}
-        color="white"
-        onClick={logout}
-      >
-        Se déconnecter
-      </Button>
-    </Box>
+      <TargetInfo />
+    </Flex>
   );
 };
 
